@@ -14,6 +14,7 @@ console.log('Текст внутри элемента изменён.');
 
 /*3. Найти все элементы на странице с классом "card-link", которые лежат в элементе с классом "card-body" и вывести полученную коллекцию в консоль.*/
 console.log('Задание 3.');
+// const cardLinkEls = cardBodyEl.querySelectorAll('.card-body .card-link');
 const cardBodyEl = document.querySelector('.card-body');
 // console.log(cardBodyEl);
 const cardLinkEls = cardBodyEl.querySelectorAll('.card-link');
