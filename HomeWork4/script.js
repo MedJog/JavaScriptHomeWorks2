@@ -18,13 +18,46 @@ buttonEl.addEventListener('click', () => {
 /* 3. Необходимо при отправке формы проверить, заполнены ли все поля в этой форме. Если какое-либо поле не заполнено, форма не должна отправляться, также должны быть подсвечены незаполненные поля (необходимо поставить класс error незаполненным полям). Как только пользователь начинает заполнять какое-либо поле, необходимо, при вводе в данное поле, произвести проверку:
 - Если поле пустое, необходимо данное поле подсветить (поставить класс error данному полю).
 - Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать. */
+// const form = document.querySelector('form');
+// const inputs = form.querySelectorAll('.form-control');
+// const buttons = document.querySelectorAll('button');
+// const buttonSend = buttons[1];
+// function validateForm () {
+//   let formValid = true;
+//   inputs.forEach(input => {
+//     if (input.value.trim() === '') {
+//       input.classList.add('error');
+//       formValid = false;
+//     } else {
+//       input.classList.remove('error');
+//     }
+//   });
+//   return formValid;
+// }
+
+// buttonSend.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   if (!validateForm()) {
+//     console.log(validateForm());
+//     document.body.insertAdjacentHTML('beforeEnd', `<p class="message-error">Заполните все поля</p>`);
+//   } else {
+//     form.submit();
+//   }
+// });
+
+// buttonSend.addEventListener('click', (event) => {
+//   event.preventDefault();
+//   const errorMessage = document.querySelector('.message-error');
+//   if (errorMessage) {
+//     errorMessage.remove();
+//   }
 const form = document.querySelector('form');
 const inputs = form.querySelectorAll('.form-control');
-const buttons = document.querySelectorAll('button');
-const buttonSend = buttons[1];
-function validateForm () {
+const buttonSend = form.querySelector('button');
+
+function validateForm() {
   let formValid = true;
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     if (input.value.trim() === '') {
       input.classList.add('error');
       formValid = false;
@@ -37,14 +70,33 @@ function validateForm () {
 
 buttonSend.addEventListener('click', (event) => {
   event.preventDefault();
+  const errorMessage = document.querySelector('.message-error');
+  if (errorMessage) {
+    errorMessage.remove();
+  }
+
   if (!validateForm()) {
-    console.log(validateForm());
     document.body.insertAdjacentHTML('beforeEnd', `<p class="message-error">Заполните все поля</p>`);
   } else {
     form.submit();
   }
 });
 
+inputs.forEach((input) => {
+  input.addEventListener('input', () => {
+    if (input.value.trim() !== '') {
+      input.classList.remove('error');
+    } else {
+      input.classList.add('error');
+    }
+    const errorMessage = document.querySelector('.message-error');
+    if (errorMessage) {
+      errorMessage.remove();
+    }
+  });
+});
+
+ 
 
 
 
